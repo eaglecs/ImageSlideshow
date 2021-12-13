@@ -11,6 +11,7 @@ import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.interfaces.TouchListener
 import com.denzcoskun.imageslider.models.SlideModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by Deniz Coşkun on 6/23/2020.
@@ -27,11 +28,11 @@ class MainActivity : AppCompatActivity() {
         val imageSlider = findViewById<ImageSlider>(R.id.image_slider) // init imageSlider
 
         val imageList = ArrayList<SlideModel>() // Create image list
-        imageList.add(SlideModel("https://bit.ly/37Rn50u", "Baby Owl",ScaleTypes.CENTER_CROP))
+        imageList.add(SlideModel("https://bit.ly/37Rn50u", "Baby Owl"))
         imageList.add(SlideModel("https://bit.ly/2BteuF2", "Elephants and tigers may become extinct."))
         imageList.add(SlideModel("https://bit.ly/3fLJf72", "The population of elephants is decreasing in the world."))
 
-        imageSlider.setImageList(imageList)
+        imageSlider.setImageList(imageList,ScaleTypes.CENTER_INSIDE)
 
         imageSlider.setItemClickListener(object : ItemClickListener {
             override fun onItemSelected(position: Int) {
@@ -45,6 +46,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        btnBack.setOnClickListener {
+            imageSlider.setCurrentItem(0)
+        }
         imageSlider.setTouchListener(object : TouchListener {
             override fun onTouched(touched: ActionTypes) {
                 if (touched == ActionTypes.DOWN){
